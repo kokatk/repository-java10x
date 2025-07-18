@@ -1,6 +1,6 @@
 package com.java10x.CadastroNinjas.model;
 
-import java.util.*;
+
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,5 +17,8 @@ public class NinjaModel {
     private Long Id;
     private String nome, email;
     private int idade;
-    private List<MissoesModel> missoes;
+    
+    @ManyToOne
+    @JoinColumn(name = "missoes_id")
+    private MissoesModel missoes;
 }
