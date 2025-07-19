@@ -1,33 +1,28 @@
 package com.java10x.CadastroNinjas.controller;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("missoes")
 public class MissoesController {
 
-    @PostMapping("/registrarMissao")
+    @PostMapping("/registrar")
     public String registrarMissao() {
     
         return "ninja registrado";
     } 
 
-    @GetMapping("/listarMissoes")
+    @GetMapping("/listar")
     public String listarMissoes() {
         return "lista todos";
     }
 
-    @PutMapping("editarMissao/{id}")
+    @PutMapping("editar/{id}")
     public String editarMissao() {
       return "alterar";
     }
 
-    @DeleteMapping("/deletarMissao/{id}")
+    @DeleteMapping("/deletar/{id}")
     public String deletarMissao(){
         return "deletar";
     }

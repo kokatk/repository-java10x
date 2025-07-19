@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("ninjas")
 public class NinjaController {
 
     @GetMapping("/boasVidas")
@@ -18,14 +18,14 @@ public class NinjaController {
 
 
     //Adicionar Ninja
-   @PostMapping("/registrarNinja")
+   @PostMapping("/registrar")
     public String registrarNinja() {
     
         return "ninja registrado";
     }
     
     //Lista todos os Ninjas
-     @GetMapping("/listarNinjas")
+     @GetMapping("/listar")
     public String listarTodos() {
         return "lista todos";
     }
@@ -38,13 +38,13 @@ public class NinjaController {
     
 
     //Alterar Ninja
-    @PutMapping("editarNinja/{id}")
+    @PutMapping("editar/{id}")
     public String editarNinja() {
       return "alterar";
     }
 
     //Deletar Ninja
-    @DeleteMapping("/deletarNinja/{id}")
+    @DeleteMapping("/deletar/{id}")
     public String deletarNinja(){
         return "deletar";
     }
