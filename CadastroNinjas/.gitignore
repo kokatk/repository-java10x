@@ -1,5 +1,4 @@
-
-### Geral: Arquivos temporários, logs e backups ###
+# Geral: Arquivos temporários, logs e backups (essenciais para clean builds)
 *.tmp
 *.temp
 *.bak
@@ -7,63 +6,54 @@
 *~
 *.log
 *.pid
-*.seed
-*.dat
 error_log
 debug.log
-npm-debug.log
-yarn-debug.log
-yarn-error.log
 
-### Segurança: Ignorar arquivos sensíveis e credenciais ###
+# Segurança: Ignorar arquivos sensíveis, credenciais e configurações privadas (prioridade máxima, incluindo infos de BD)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 *.env.*
+application-secrets.properties
+application-secrets.yml
 *.secret
 *.key
 *.pem
 *.crt
+*.keystore
+*.truststore
 credentials.*
 config/secrets.yml
+config/secrets.properties
 database.yml
 secrets.yml
+secrets.properties
 *.sqlite3
+*.sql  # Ignora scripts SQL soltos (para schemas, use exceções se necessário)
+*.dump  # Dumps de banco de dados
+datasource.properties  # Configs de datasource sensíveis
+application-datasource.properties
+application-*.properties  # Ignora profiles sensíveis como application-prod.properties; ajuste se necessário
+application-*.yml
 
-### Builds, dist e pacotes ###
+# Builds, dist e pacotes (focado em Java/Spring Boot para evitar commits de artefatos)
 build/
 dist/
 out/
 target/
 bin/
 obj/
-node_modules/
-vendor/
-bower_components/
-*.egg-info/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
 *.class
 *.jar
 *.war
 *.ear
-*.dll
-*.exe
-*.o
-*.so
-data/  # Adicionado: Ignora a pasta data e seu conteúdo
+src/data/  # Ignora explicitamente a pasta data na raiz de src e todo o seu conteúdo (proibido para GitHub)
 
-### Docker ###
+# Docker (comum em Spring Boot para containers seguros; remova se não usar)
 *.dockerignore
 Dockerfile.*
 docker-compose.*
 .docker/
 
-### Sistemas Operacionais ###
+# Sistemas Operacionais (para manter o repo limpo em equipes multi-plataforma)
 
 # macOS
 .DS_Store
@@ -105,7 +95,7 @@ $RECYCLE.BIN/
 .Trash-*
 .nfs*
 
-### Editores e IDEs ###
+# Editores e IDEs (VSCode e IntelliJ, comuns em Spring Boot dev)
 
 # Visual Studio Code
 .vscode/*
@@ -117,108 +107,23 @@ $RECYCLE.BIN/
 .history/
 *.vsix
 
-# JetBrains (IntelliJ, PyCharm, etc.)
+# JetBrains (IntelliJ, Spring Tool Suite)
 .idea/
 *.iml
 *.iws
 out/
-!.idea/file.templateSettings.txt
 .idea/jsLinters/
 .idea/dictionaries
-.idea/file.templateSettings.txt
 .idea/httpRequests/
 .idea/fileTemplates
 .idea/fileTemplates.code
 .idea/fileTemplates.internal
 .idea/fileTemplates.j2ee
 .idea/runConfigurations
+.sts4-cache/  # Específico para Spring Tool Suite
 
-### Linguagens Específicas ###
-
-# Python
-*.py[cod]
-*$py.class
-.Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-*.mo
-*.pot
-*.pyz
-*.whl
-wheels/
-share/python-wheels/
-*.egg
-develop-eggs/
-downloads/
-eggs/
-.eggs/
-parts/
-sdist/
-var/
-*.manifest
-*.spec
-pip-wheel-metadata/
-lib/
-lib64/
-pyvenv.cfg
-pip-selfcheck.json
-
-# Node.js
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-pids
-*.pid
-*.seed
-*.pid.lock
-lib
-node_modules
-jspm_packages/
-typings/
-*.tsbuildinfo
-.npm
-.eslintcache
-.node_repl_history
-*.tgz
-.yarn-integrity
-.env
-.next/cache/
-.swc/
-.turbo/
-.vercel/
-coverage
-dist-ssr
-*.local
-cypress/downloads
-
-# Java
-*.class
-.m2/
-*.jar
-*.war
-*.ear
+# Java/Spring Boot Específicos (Maven, Gradle, JVM)
+.m2/  # Cache Maven local (sensível, pode conter creds; ignore para segurança)
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -230,58 +135,18 @@ mvnw.cmd
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-# Go
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-bin/
-Godeps/_workspace/
-vendor/
-
-# Ruby / Rails
-*.rbc
-capybara-*.html
-.rspec
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/db/*.sqlite3-[0-9]*
-/public/system
-/coverage/
-/spec/tmp
-tmp/
-*.orig
-rerun.txt
-pickle-email-*.html
-.byebug_history
-doc/
-*.rdoc
-vendor/cache/
-vendor/bundle
-vendor/gems
-.bundle
-pkg/
-.rvmrc
-.rbenv-version
-.ruby-version
-.ruby-gemset
-Gemfile.lock (opcional, dependendo do projeto)
-
-# Rails specific
-*.bridge
-config/initializers/*.local.rb
-config/database.yml
-config/secrets.yml
-config/cable.yml
-config/puma.rb (se sensível)
-log/*
-tmp/*
-public/uploads
-public/packs
-public/packs-test
-node_modules
-yarn-error.log
-.yarn-integrity
-public/assets
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+HELP.md  # Gerado por Maven archetypes
+hs_err_pid*  # Logs de crash JVM (pode conter dados sensíveis)
+.apt_generated/
+.factorypath
+.recommenders/
+.externalToolBuilders/
+*.launch
