@@ -150,3 +150,5 @@ hs_err_pid*  # Logs de crash JVM (pode conter dados sensíveis)
 .recommenders/
 .externalToolBuilders/
 *.launch
+/data/
+.vscode/
