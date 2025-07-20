@@ -33,17 +33,24 @@ public class NinjaService {
         return ninjaPorId.orElse(null);
     }
 
-    // Exemplo: Salvar ou atualizar (com transação para atomicidade)
+
     @Transactional 
     public NinjaModel registrarNinja(NinjaModel ninja) {
         return ninjasRepository.save(ninja);
     }
 
-   public NinjaModel alterarNinja(Long id, NinjaModel ninja) {
-        if (ninjasRepository.existsById(id)){
-            ninja.setId(id);
-            return ninjasRepository.save(ninja);
-        }
+    public NinjaModel alterarNinja(Long id, NinjaModel ninja) {
+        return ninjasRepository.findById(id)
+                .map(n -> {
+                    n.setNome(ninja.getNome());
+                    n.setEmail(ninja.getEmail());
+                    n.setRank(ninja.getRank());
+                    n.setImgUrl(ninja.getImgUrl());
+                    n.setIdade(ninja.getIdade());
+                    n.setMissoes(ninja.getMissoes());
+                    return ninjasRepository.save(n);
+                })
+                .orElse(null);
     }
 
     // Exemplo: Deletar
