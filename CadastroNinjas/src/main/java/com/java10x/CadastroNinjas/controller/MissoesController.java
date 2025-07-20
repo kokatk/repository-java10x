@@ -15,13 +15,13 @@ public class MissoesController {
 
     @PostMapping("/registrar")
     public ResponseEntity<String> registrarMissao(@RequestBody MissoesModel missao) {
-        NinjaModel novaMissao = missaoService.registrarNinja(missao);
+        MissaoModel novaMissao = missaoService.registrarMissao(missao);
         return ResponseEntity.status(HttpStatus.CREATED)
             .body("Nova missão criada com sucesso! " + novaMissao.getNome() + " com (ID): " + novaMissao.getId());
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<NinjaModel>> listarTodos() {
+    public ResponseEntity<List<MissaoModel>> listarTodos() {
         List<MissoesModel> missoes = missaoService.listarMissoes();
         return ResponseEntity.ok(missoes);
     }
@@ -29,7 +29,7 @@ public class MissoesController {
 
     @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarId(@PathVariable Long id) {
-        NinjaModel missao = missaoService.buscarId(id);
+        MissaoModel missao = missaoService.buscarId(id);
         if (missao != null) {
             return ResponseEntity.ok(missao);
         } else {
@@ -39,13 +39,25 @@ public class MissoesController {
     }
 
 
-    @PutMapping("editar/{id}")
-    public String editarMissao() {
-      return "alterar";
+    @PutMapping("alterar/{id}")
+    public ResponseEntity<String> alterarMissao(@PathVariable Long id, @RequestBody MissaoModel missao) {
+        if(missaoService.buscarId(id) != null){
+            missaoService.alterarMissao(id, missao);
+        return ResponseEntity.ok("Dados da missao " + missao.getNome() + " com (ID):" + id + " alterados com sucesso!");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("A missao " + missao.getNome() + " com o id " + id + " não encontrado!");
+        }
     }
 
     @DeleteMapping("/deletar/{id}")
-    public String deletarMissao(){
-        return "deletar";
+    public ResponseEntity<String> deletarMissao(@PathVariable Long id){
+        if(missaoService.buscarId(id) != null){
+            missaoService.deletarMissao(id);
+        return ResponseEntity.ok("Missao com ID " + id + " deletado com sucesso!");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("A missao com o id " + id + " não encontrado!");
+        }
     }
 }
