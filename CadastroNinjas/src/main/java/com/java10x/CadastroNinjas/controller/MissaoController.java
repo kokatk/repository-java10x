@@ -7,21 +7,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.java10x.CadastroNinjas.model.MissoesModel;
-import com.java10x.CadastroNinjas.model.NinjaModel;
+import com.java10x.CadastroNinjas.service.MissaoService;
+
 
 @RestController
 @RequestMapping("missoes")
-public class MissoesController {
+public class MissaoController {
+
+    private final MissaoService missaoService;
+
+
+    MissaoController(MissaoService missaoService) {
+        this.missaoService = missaoService;
+    }
 
     @PostMapping("/registrar")
     public ResponseEntity<String> registrarMissao(@RequestBody MissoesModel missao) {
-        MissaoModel novaMissao = missaoService.registrarMissao(missao);
+        MissoesModel novaMissao = missaoService.registrarMissao(missao);
         return ResponseEntity.status(HttpStatus.CREATED)
             .body("Nova missão criada com sucesso! " + novaMissao.getNome() + " com (ID): " + novaMissao.getId());
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<MissaoModel>> listarTodos() {
+    public ResponseEntity<List<MissoesModel>> listarTodos() {
         List<MissoesModel> missoes = missaoService.listarMissoes();
         return ResponseEntity.ok(missoes);
     }
@@ -29,7 +37,7 @@ public class MissoesController {
 
     @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarId(@PathVariable Long id) {
-        MissaoModel missao = missaoService.buscarId(id);
+        MissoesModel missao = missaoService.buscarId(id);
         if (missao != null) {
             return ResponseEntity.ok(missao);
         } else {
@@ -40,7 +48,7 @@ public class MissoesController {
 
 
     @PutMapping("alterar/{id}")
-    public ResponseEntity<String> alterarMissao(@PathVariable Long id, @RequestBody MissaoModel missao) {
+    public ResponseEntity<String> alterarMissao(@PathVariable Long id, @RequestBody MissoesModel missao) {
         if(missaoService.buscarId(id) != null){
             missaoService.alterarMissao(id, missao);
         return ResponseEntity.ok("Dados da missao " + missao.getNome() + " com (ID):" + id + " alterados com sucesso!");
