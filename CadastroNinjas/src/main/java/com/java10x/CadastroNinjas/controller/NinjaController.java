@@ -2,7 +2,6 @@ package com.java10x.CadastroNinjas.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +18,14 @@ import com.java10x.CadastroNinjas.service.NinjaService;
 @RequestMapping("ninjas")
 public class NinjaController {
 
+    private final NinjaService ninjaService;
 
-    @Autowired
-    private NinjaService ninjaService;
 
+    NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
+
+    
 
     //Adicionar Ninja
     @PostMapping("/registrar")
@@ -41,10 +44,10 @@ public class NinjaController {
 
     //Listar Ninja por ID
     @GetMapping("/listar/{id}")
-    public ResponseEntity<String> listarId(@PathVariable Long id) {
+    public ResponseEntity<?> listarId(@PathVariable Long id) {
         NinjaModel ninja = ninjaService.buscarId(id);
         if (ninja != null) {
-            return ResponseEntity.ok("Ninja: " + ninja.getNome() + " com (ID):" + id + " listado com sucesso!");
+            return ResponseEntity.ok(ninja);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("O ninja com o id " + id + " não existe em nossos registros!");

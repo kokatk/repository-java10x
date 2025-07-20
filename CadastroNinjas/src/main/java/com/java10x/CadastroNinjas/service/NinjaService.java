@@ -3,6 +3,7 @@ package com.java10x.CadastroNinjas.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,8 +14,8 @@ import com.java10x.CadastroNinjas.repository.NinjasRepository;
 @RequestMapping("/ninjas")
 public class NinjaService {
 
-    
-    private NinjasRepository ninjasRepository;
+    @Autowired
+    private final NinjasRepository ninjasRepository;
 
     public NinjaService(NinjasRepository ninjasRepository) {
         this.ninjasRepository = ninjasRepository;
