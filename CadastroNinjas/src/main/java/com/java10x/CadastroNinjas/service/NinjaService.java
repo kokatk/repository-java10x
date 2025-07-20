@@ -34,14 +34,21 @@ public class NinjaService {
     }
 
     // Exemplo: Salvar ou atualizar (com transação para atomicidade)
-    @Transactional
-    public NinjaModel save(NinjaModel ninja) {
+    @Transactional 
+    public NinjaModel registrarNinja(NinjaModel ninja) {
         return ninjasRepository.save(ninja);
+    }
+
+   public NinjaModel alterarNinja(Long id, NinjaModel ninja) {
+        if (ninjasRepository.existsById(id)){
+            ninja.setId(id);
+            return ninjasRepository.save(ninja);
+        }
     }
 
     // Exemplo: Deletar
     @Transactional
-    public void deleteById(Long id) {
+    public void deletarNinja(Long id) {
         ninjasRepository.deleteById(id);
     }
 

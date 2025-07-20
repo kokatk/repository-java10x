@@ -24,9 +24,8 @@ public class NinjaController {
 
     //Adicionar Ninja
     @PostMapping("/registrar")
-    public String registrarNinja() {
-    
-        return "ninja registrado";
+    public NinjaModel registrarNinja(@RequestBody NinjaModel ninja) {
+        return ninjaService.registrarNinja(ninja);
     }
     
     //Lista todos os Ninjas
@@ -43,15 +42,15 @@ public class NinjaController {
     
 
     //Alterar Ninja
-    @PutMapping("editar/{id}")
-    public String editarNinja() {
-       return "alterar";
+    @PutMapping("alterar/{id}")
+    public NinjaModel alterarNinja(@PathVariable Long id, @RequestBody NinjaModel ninja) {
+        return ninjaService.alterarNinja(id, ninja);
     }
 
     //Deletar Ninja
     @DeleteMapping("/deletar/{id}")
-    public String deletarNinja(){
-        return "deletar";
+    public void deletarNinja(@PathVariable Long id){
+        ninjaService.deletarNinja(id);
     }
     
 }
