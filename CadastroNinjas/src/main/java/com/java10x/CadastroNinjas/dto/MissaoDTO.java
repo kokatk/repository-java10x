@@ -2,7 +2,8 @@ package com.java10x.CadastroNinjas.dto;
 
 import java.util.List;
 
-import com.java10x.CadastroNinjas.model.NinjaModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import lombok.*;
 
@@ -14,6 +15,8 @@ public class MissaoDTO {
     private Long id;
     private String nome;
     private String dificuldade;
-    private List<NinjaModel> ninjas;
+
+    @JsonIgnore
+    private List<NinjaDTO> ninjas;
 
 }
