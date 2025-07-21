@@ -6,7 +6,5 @@ import com.java10x.CadastroNinjas.dto.NinjaDTO;
 import com.java10x.CadastroNinjas.model.NinjaModel;
 
 public interface NinjasRepository extends JpaRepository<NinjaModel, Long> {
-
     NinjaDTO save(NinjaDTO ninja);
-
 }
