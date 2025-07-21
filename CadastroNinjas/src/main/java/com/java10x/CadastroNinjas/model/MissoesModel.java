@@ -7,7 +7,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
@@ -22,7 +24,7 @@ public class MissoesModel {
     private String nome;
     private String dificuldade;
 
-    @OneToMany(mappedBy = "missoes") //chave estrageira para a tabela de ninjas
+    @OneToMany(mappedBy = "missao") //chave estrageira para a tabela de ninjas
     @JsonIgnore
     private List<NinjaModel> ninjas;
 }

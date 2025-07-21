@@ -6,11 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.java10x.CadastroNinjas.model.NinjaModel;
+import com.java10x.CadastroNinjas.dto.NinjaDTO;
 import com.java10x.CadastroNinjas.service.NinjaService;
-
-
-
 
 
 
@@ -29,23 +26,23 @@ public class NinjaController {
 
     //Adicionar Ninja
     @PostMapping("/registrar")
-    public ResponseEntity<String> registrarNinja(@RequestBody NinjaModel ninja) {
-        NinjaModel novoNinja = ninjaService.registrarNinja(ninja);
+    public ResponseEntity<String> registrarNinja(@RequestBody NinjaDTO ninja) {
+        NinjaDTO novoNinja = ninjaService.registrarNinja(ninja);
         return ResponseEntity.status(HttpStatus.CREATED)
             .body("Ninja criado com sucesso! " + novoNinja.getNome() + " com (ID): " + novoNinja.getId());
     }
     
     //Lista todos os Ninjas
     @GetMapping("/listar")
-    public ResponseEntity<List<NinjaModel>> listarTodos() {
-        List<NinjaModel> ninjas = ninjaService.listarNinjas();
+    public ResponseEntity<List<NinjaDTO>> listarTodos() {
+        List<NinjaDTO> ninjas = ninjaService.listarNinjas();
         return ResponseEntity.ok(ninjas);
     }
 
     //Listar Ninja por ID
     @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarId(@PathVariable Long id) {
-        NinjaModel ninja = ninjaService.buscarId(id);
+        NinjaDTO ninja = ninjaService.buscarId(id);
         if (ninja != null) {
             return ResponseEntity.ok(ninja);
         } else {
@@ -56,8 +53,8 @@ public class NinjaController {
     
 
     //Alterar Ninja
-    @PutMapping("alterar/{id}")
-    public ResponseEntity<String> alterarNinja(@PathVariable Long id, @RequestBody NinjaModel ninja) {
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<String> alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja) {
         if(ninjaService.buscarId(id) != null){
             ninjaService.alterarNinja(id, ninja);
         return ResponseEntity.ok("Dados do ninja " + ninja.getNome() + " com (ID):" + id + " alterados com sucesso!");

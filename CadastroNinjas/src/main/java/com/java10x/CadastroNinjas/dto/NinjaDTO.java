@@ -1,8 +1,8 @@
 package com.java10x.CadastroNinjas.dto;
 
-
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -15,6 +15,6 @@ public class NinjaDTO {
     private String rank;
     private String imgUrl;
     private int idade;
-    private MissaoDTO missoes;
+    private MissaoDTO missao;
 
 }

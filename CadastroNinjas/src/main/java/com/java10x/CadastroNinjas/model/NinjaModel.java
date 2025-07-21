@@ -3,7 +3,9 @@ package com.java10x.CadastroNinjas.model;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
@@ -32,6 +34,7 @@ public class NinjaModel {
     private int idade;
     
     @ManyToOne
-    @JoinColumn(name = "missoes_id")
-    private MissoesModel missoes;
+    @JoinColumn(name = "missao_id")
+    private MissoesModel missao;
+
 }

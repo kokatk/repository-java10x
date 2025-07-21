@@ -1,55 +1,54 @@
 package com.java10x.CadastroNinjas.mapper;
 
-import org.mapstruct.*;
+import org.springframework.stereotype.Component;
 
-import com.java10x.CadastroNinjas.dto.MissaoDTO;
 import com.java10x.CadastroNinjas.dto.NinjaDTO;
-import com.java10x.CadastroNinjas.model.MissoesModel;
 import com.java10x.CadastroNinjas.model.NinjaModel;
+import com.java10x.CadastroNinjas.dto.MissaoDTO;
+import com.java10x.CadastroNinjas.model.MissoesModel;
 
-import java.util.List;
+@Component
+public class NinjaMapper {
 
-@Mapper(componentModel = "spring") // Integra com Spring para @Autowired
-public interface NinjaMapper {
-
-    // Mapeamento de NinjaModel para NinjaDTO
-    @Mappings({
-        @Mapping(target = "id", source = "Id"), // Campos com nomes diferentes
-        @Mapping(target = "missao", source = "missoes") // Mapeia o ManyToOne
-    })
-    NinjaDTO toDTO(NinjaModel ninja);
-
-    // Mapeamento reverso: NinjaDTO para NinjaModel
-    @Mappings({
-        @Mapping(target = "Id", source = "id"),
-        @Mapping(target = "missoes", source = "missao")
-    })
-    NinjaModel toModel(NinjaDTO dto);
-
-    // Para listas de Ninjas
-    List<NinjaDTO> toDTOList(List<NinjaModel> ninjas);
-
-    // Mapeamento de MissaoModel para MissaoDTO
-    @Mapping(target = "ninjas", source = "ninjas") // Mapeia a lista OneToMany
-    MissaoDTO toMissaoDTO(MissoesModel missao);
-
-    // Mapeamento reverso para Missao
-    @Mapping(target = "ninjas", source = "ninjas")
-    MissoesModel toMissaoModel(MissaoDTO dto);
-
-    // Método para lidar com o ciclo bidirecional (seta a referência reversa após mapeamento)
-    @AfterMapping
-    default void linkNinjas(@MappingTarget MissaoDTO missaoDTO) {
-        if (missaoDTO.getNinjas() != null) {
-            missaoDTO.getNinjas().forEach(ninjaDTO -> ninjaDTO.setMissoes(missaoDTO));
-        }
+    public NinjaModel map(NinjaDTO ninjaDTO) {
+        NinjaModel ninjaModel = new NinjaModel();
+        ninjaModel.setId(ninjaDTO.getId());
+        ninjaModel.setNome(ninjaDTO.getNome());
+        ninjaModel.setEmail(ninjaDTO.getEmail());
+        ninjaModel.setRank(ninjaDTO.getRank());
+        ninjaModel.setImgUrl(ninjaDTO.getImgUrl());
+        ninjaModel.setIdade(ninjaDTO.getIdade());
+        ninjaModel.setMissao(mapToModel(ninjaDTO.getMissao()));
+        return ninjaModel;
     }
 
-    // Similar para o outro lado, se necessário
-    @AfterMapping
-    default void linkMissao(@MappingTarget NinjaDTO ninjaDTO, NinjaModel ninjaModel) {
-        if (ninjaDTO.getMissoes() != null && ninjaModel.getMissoes() != null) {
-            // Lógica adicional se precisar sincronizar
-        }
+    public NinjaDTO map(NinjaModel ninjaModel) {
+        NinjaDTO ninjaDTO = new NinjaDTO();
+        ninjaDTO.setId(ninjaModel.getId());
+        ninjaDTO.setNome(ninjaModel.getNome());
+        ninjaDTO.setEmail(ninjaModel.getEmail());
+        ninjaDTO.setRank(ninjaModel.getRank());
+        ninjaDTO.setImgUrl(ninjaModel.getImgUrl());
+        ninjaDTO.setIdade(ninjaModel.getIdade());
+        ninjaDTO.setMissao(mapToDTO(ninjaModel.getMissao()));
+        return ninjaDTO;
+    }
+
+    private MissoesModel mapToModel(MissaoDTO missaoDTO) {
+        if (missaoDTO == null) return null;
+        MissoesModel model = new MissoesModel();
+        model.setId(missaoDTO.getId());
+        model.setNome(missaoDTO.getNome());
+        model.setDificuldade(missaoDTO.getDificuldade());
+        return model;
+    }
+
+    private MissaoDTO mapToDTO(MissoesModel missaoModel) {
+        if (missaoModel == null) return null;
+        MissaoDTO dto = new MissaoDTO();
+        dto.setId(missaoModel.getId());
+        dto.setNome(missaoModel.getNome());
+        dto.setDificuldade(missaoModel.getDificuldade());
+        return dto;
     }
 }
