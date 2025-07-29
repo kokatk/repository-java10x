@@ -46,7 +46,7 @@ Espaço reservado para prints do Postman, Swagger ou tela da aplicação.
 > Pode usar peek ou ScreenToGif para gerar gifs.
 
 ## 🙏 Créditos e Agradecimentos
-Projeto baseado no curso Java10x do incrível Fiasco Dev 👊🏼
+Projeto baseado no curso Java10x do sensei Fiasco 👊🏼
 Aprendizado diário, código com chakras em dia 💥
 
 > "Aqueles que não compartilham conhecimento... são piores que lixo!" — Kakashi Hatake
