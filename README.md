@@ -58,5 +58,3 @@ Aprendizado diário, código com chakras em dia 💥
 
 ---
 
-Organize tudo com clareza e sem verbosidade. Priorize uma documentação que ajude outros devs a usar e entender o sistema rapidamente.
-Mantenha o espírito do projeto leve, com referências criativas ao universo Naruto sem perder o profissionalismo.
