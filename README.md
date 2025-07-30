@@ -1,4 +1,5 @@
 # 🔥 Sistema de Cadastro de Ninjas do Curso Java10x 🍥
+https://java10x.dev/
 
 ## 📖 Descrição
 Uma aplicação CRUD inspirada no universo de Naruto, desenvolvida para aprendizado prático em Java e Spring Boot. Permite cadastrar ninjas, associar missões, atualizar e encerrar tarefas com facilidade.
@@ -38,11 +39,6 @@ docker-compose up
 | PUT    | /missoes/alterar/{id} | Atualiza dados da missão          |
 | DELETE | /missoes/deletar/{id} | Remove missão                     |
 
-
-## 🙏 Créditos e Agradecimentos
-Projeto baseado no curso Java10x do sensei Fiasco 👊🏼
-
-> "Aqueles que não compartilham conhecimento... são piores que lixo!" — Kakashi Hatake
 
 ## 🏷️ Badges Temáticos
 ![Java](https://img.shields.io/badge/Java-17-orange?logo=java)
