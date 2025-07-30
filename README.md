@@ -38,16 +38,9 @@ docker-compose up
 | PUT    | /missoes/alterar/{id} | Atualiza dados da missão          |
 | DELETE | /missoes/deletar/{id} | Remove missão                     |
 
-➡️ Adicionar exemplos JSON e prints futuramente aqui.
-
-## 🖼️ Prints ou Gifs
-Espaço reservado para prints do Postman, Swagger ou tela da aplicação.
-
-> Pode usar peek ou ScreenToGif para gerar gifs.
 
 ## 🙏 Créditos e Agradecimentos
 Projeto baseado no curso Java10x do sensei Fiasco 👊🏼
-Aprendizado diário, código com chakras em dia 💥
 
 > "Aqueles que não compartilham conhecimento... são piores que lixo!" — Kakashi Hatake
 
